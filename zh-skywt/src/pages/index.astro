@@ -1,0 +1,68 @@
+---
+import Layout from "../layouts/Layout.astro";
+import LoadingCover from "../components/LoadingCover";
+---
+
+<Layout title="@zhhe">
+  <main class="main">
+    <LoadingCover />
+    <h3 class="subhero">@zhhe</h3>
+    <h1 class="hero">
+      Student<span class="hidden sm:inline">·</span><br
+        class="sm:hidden"
+      />Creator
+    </h1>
+    <div class="buttons">
+      <a href="mailto:hey@zhhe.dev" target="_self" class="button">🗃️Mail</a>
+    </div>
+  </main>
+  <footer class="footer">
+    <p>
+      Copyright © 2019-2024 @zhhe
+    </p>
+  </footer>
+</Layout>
+
+<style lang="scss">
+  .main {
+    @apply h-svh flex flex-col justify-center items-center px-4;
+
+    .fade-in {
+      @apply animate-fade-up animate-ease-in-out animate-duration-[800ms];
+    }
+
+    .subhero {
+      @apply text-2xl drop-shadow-xl font-black font-ding text-gray-500;
+    }
+
+    .hero {
+      @apply text-6xl drop-shadow-xl font-black mt-6 font-ding text-[#007fff] leading-normal;
+    }
+
+    .buttons {
+      @apply mt-12 flex;
+      .button {
+        @apply block mx-4 p-2 w-28 rounded shadow-md;
+        @apply transition-all;
+        @apply text-center select-none;
+        @apply bg-white hover:bg-gray-200;
+        @apply dark:bg-neutral-800 dark:hover:bg-neutral-950;
+        @apply hover:shadow-none active:scale-95;
+        &__disabled {
+          @apply text-gray-500 bg-gray-200;
+          @apply dark:bg-neutral-700 dark:hover:bg-neutral-700;
+          @apply active:scale-100;
+          @apply cursor-not-allowed shadow-none;
+        }
+      }
+    }
+  }
+
+  .footer {
+    @apply w-full fixed bottom-0 text-center my-4 text-gray-400;
+    .link {
+      @apply no-underline;
+      @apply hover:underline;
+    }
+  }
+</style>

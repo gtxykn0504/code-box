@@ -1,0 +1,36 @@
+---
+import Metas from "./Metas.astro";
+
+interface Props {
+  header: Header;
+}
+
+const { header } = Astro.props;
+---
+
+<div class="header">
+  <h1 class="name">
+    {header.name}
+  </h1>
+  <div class="info">
+    <Metas metas={header.metas} />
+  </div>
+</div>
+
+<style lang="scss">
+  .header {
+    @apply mt-16;
+    @apply flex;
+    @apply flex-col items-center;
+    @apply sm:flex-row sm:items-end sm:justify-between;
+
+    .name {
+      @apply font-black text-5xl font-ding mr-4 text-nowrap;
+    }
+
+    .info {
+      @apply mt-4 sm:mt-0;
+      @apply font-ding text-nowrap;
+    }
+  }
+</style>

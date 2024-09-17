@@ -1,0 +1,73 @@
+---
+import Icon from "./Icon.astro";
+import Items from "./Items.astro";
+import Techs from "./Techs.astro";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="project">
+  <div class="first_row">
+    <span class="title">{project.title}</span>
+    {project.subtitle && <span class="subtitle">{project.subtitle}</span>}
+    {project.desc && <span class="desc">{project.desc}</span>}
+    <span class="flex-1"></span>
+    {project.date && <span class="date">{project.date}</span>}
+  </div>
+  {
+    (project.caption || project.techs) && (
+      <div class="second_row">
+        {project.icon && (
+          <div class="icon">
+            <Icon name={project.icon} size="1.2rem" class="block" />
+          </div>
+        )}
+        {project.caption && <div class="caption">{project.caption}</div>}
+        {project.techs && <Techs techs={project.techs} />}
+      </div>
+    )
+  }
+  {
+    project.items && (
+      <div>
+        <Items items={project.items} />
+      </div>
+    )
+  }
+</div>
+
+<style lang="scss">
+  .project {
+    @apply mt-1;
+
+    .first_row {
+      @apply flex flex-wrap items-baseline w-full;
+      .title {
+        @apply font-bold mr-4 text-lg font-ding;
+      }
+      .subtitle {
+        @apply font-ding;
+      }
+      .desc {
+        @apply text-sm font-light text-gray-500;
+      }
+      .date {
+        @apply text-sm font-light text-gray-500;
+      }
+    }
+
+    .second_row {
+      @apply flex flex-wrap items-baseline;
+      .icon {
+        @apply mr-1;
+      }
+      .caption {
+        @apply mr-4;
+      }
+    }
+  }
+</style>

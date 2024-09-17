@@ -1,0 +1,44 @@
+---
+import { getEntry, getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("cv");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Section from "../components/Section.astro";
+import LoadingCover from "../components/LoadingCover";
+
+const { entry } = Astro.props;
+
+const data = await getEntry(entry);
+---
+
+<Layout title="WebCV">
+  <main class="container">
+    <LoadingCover />
+    <div class="content">
+      <Header header={data.data.header} />
+      {
+        data.data.sections.map((section: Section) => (
+          <Section section={section} />
+        ))
+      }
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  .container {
+    // @apply w-full flex justify-center;
+    @apply max-w-4xl mx-auto;
+    .content {
+      @apply mx-4 sm:mx-8;
+    }
+  }
+</style>

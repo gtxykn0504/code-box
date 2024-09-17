@@ -1,0 +1,57 @@
+---
+import Techs from "./Techs.astro";
+
+interface Props {
+  table: Table;
+}
+
+const { table } = Astro.props;
+---
+
+<div class="wrapper">
+  <table class="table">
+    <tr>
+      <th class="cell"></th>
+      {table.cols.map((col) => <th class="cell cell__header">{col}</th>)}
+    </tr>
+    {
+      table.rows.map((row, rowIndex) => (
+        <tr>
+          <td class="cell cell__header">{row}</td>
+          {table.cols.map((col, colIndex) => (
+            <td class="cell cell__body">
+              {table.cells[rowIndex][colIndex].lines.map((line) => (
+                <Techs class="justify-center" techs={line} />
+              ))}
+            </td>
+          ))}
+        </tr>
+      ))
+    }
+  </table>
+</div>
+
+<style lang="scss">
+  .wrapper {
+    @apply overflow-x-auto;
+
+    .table {
+      @apply w-full mt-2;
+      @apply border border-gray-500;
+    }
+
+    .cell {
+      @apply border border-gray-500;
+      @apply text-center text-nowrap;
+      @apply px-2;
+
+      &__header {
+        @apply text-lg;
+        @apply font-ding;
+      }
+      &__body {
+        @apply text-sm;
+      }
+    }
+  }
+</style>
